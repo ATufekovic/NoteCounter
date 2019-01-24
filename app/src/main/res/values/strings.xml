@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Note Counter</string>
+    <string name="et_item_name_hint">Item name</string>
+    <string name="et_item_count_hint">Count</string>
+    <string name="btn_create">Create entry</string>
+    <string name="btn_delete">Delete focus</string>
+</resources>
