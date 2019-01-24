@@ -65,7 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<NameViewHolder> {
         return entryList;
     }
 
-    public void insertNewItem(String name,int count, int position) {
+    /*public void insertNewItem(String name,int count, int position) {
         if (position >= 0 && position <= entryList.size()) {
             entryList.add(position, new Entry(name,count));
             notifyItemInserted(position);
@@ -93,5 +93,5 @@ public class RecyclerAdapter extends RecyclerView.Adapter<NameViewHolder> {
             entryList.remove(position);
             notifyItemRemoved(position);
         }
-    }
+    }*/
 }

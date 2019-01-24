@@ -4,4 +4,7 @@
     <string name="et_item_count_hint">Count</string>
     <string name="btn_create">Create entry</string>
     <string name="btn_delete">Delete focus</string>
+    <string name="tv_text_entry">New entry</string>
+    <string name="et_text_entry_name_hint">Name</string>
+    <string name="et_text_entry_count_hint">Count</string>
 </resources>

@@ -2,23 +2,23 @@ package hr.ferit.antotufekovic.notecounter;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NameClickInterface {
 
-    private EditText et_item_name;
-    private EditText et_item_count;
     private ImageView iv_create;
 
     private RecyclerView recyclerView;
@@ -26,11 +26,13 @@ public class MainActivity extends AppCompatActivity implements NameClickInterfac
 
     private EntryViewModel mEntryViewModel;
 
+    private String name;
+    private int count;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         recyclerView=findViewById(R.id.recyclerView);
         adapter = new RecyclerAdapter(this);
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements NameClickInterfac
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         initializeUI();
-        //setupRecyclerData();
         setUpListeners();
 
         mEntryViewModel=ViewModelProviders.of(this).get(EntryViewModel.class);
@@ -54,90 +55,76 @@ public class MainActivity extends AppCompatActivity implements NameClickInterfac
         iv_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name;
-                int count;
+                LayoutInflater factory = LayoutInflater.from(MainActivity.this);
+                final View textEntryView = factory.inflate(R.layout.text_entry,null);
+                final EditText et_input_name = (EditText) textEntryView.findViewById(R.id.et_text_entry_name);
+                final EditText et_input_count = (EditText) textEntryView.findViewById(R.id.et_text_entry_count);
+                et_input_name.setText("", TextView.BufferType.EDITABLE);
+                et_input_count.setText("", TextView.BufferType.EDITABLE);
+                final AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
 
-                if(!isEmpty(et_item_name))
-                {
-                    name = String.valueOf(et_item_name.getText());
-                }
-                else
-                    return;
 
-                if(!isEmpty(et_item_count))
-                {
-                    count = Integer.parseInt(et_item_count.getText().toString());
-                }
-                else
-                    return;
+                alert.setView(textEntryView);
 
-                Entry entry = new Entry(name,count);
-                //adapter.insertNewItem(entry,adapter.getItemCount());
-                //not using adapters innate methods directly anymore
-                mEntryViewModel.insert(entry);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(!isEmpty(et_input_name))
+                        {
+                            name = String.valueOf(et_input_name.getText().toString().trim());
+                        }
+                        else
+                            return;
 
-                et_item_name.setText("");
-                et_item_count.setText("");
+                        if(!isEmpty(et_input_count))
+                        {
+                            count = Integer.parseInt(et_input_count.getText().toString());
+                        }
+                        else
+                            return;
+
+                        Entry entry = new Entry(name,count);
+                        mEntryViewModel.insert(entry);
+                    }
+                });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alert.show();
+
             }
         });
     }
 
-    private void setupRecyclerData() {
-        List<Entry> data = new ArrayList<>();
-
-
-        //TODO: sharedPreference loading on startup
-        data.add(new Entry("km",0));
-
-
-        adapter.addEntries(data);
-    }
-
     private void initializeUI() {
-        et_item_name=findViewById(R.id.et_item_name);
-        et_item_count=findViewById(R.id.et_item_count);
         iv_create =findViewById(R.id.iv_create);
     }
 
     @Override
     public void onDeleteClicked(int position) {
-        //adapter.removeEntry(position);
         mEntryViewModel.delete(adapter.getEntries().get(position));
     }
 
     @Override
-    public void onIncrementClicked(int position, Entry entry) {
-        /*String name = entry.getName();
-        int count = entry.getCount();
-        count++;
-        Entry updatedUnit = new Entry(name,count);
-
-        adapter.changeEntry(updatedUnit,position);
-        adapter.notifyItemChanged(position);*/
-        //done did, my previous methods were pretty stupid
-        mEntryViewModel.incrementUpdate(entry);
+    public void onIncrementClicked(int position) {
+        mEntryViewModel.incrementUpdate(adapter.getEntries().get(position));
     }
 
     @Override
-    public void onDecrementClicked(int position, Entry entry) {
-        /*String name = entry.getName();
-        int count = entry.getCount();
-        count--;
-        Entry updatedUnit = new Entry(name,count);
-
-        adapter.changeEntry(updatedUnit,position);
-        adapter.notifyItemChanged(position);*/
-        //done did
-        mEntryViewModel.decrementUpdate(entry);
+    public void onDecrementClicked(int position) {
+        mEntryViewModel.decrementUpdate(adapter.getEntries().get(position));
     }
 
-    private boolean isEmpty(EditText etText) {
+    private boolean isEmpty(EditText etText) {//cant implement this elsewhere due to lack of view
         if (etText.getText().toString().trim().length() > 0)
             return false;
         else
         {
             Toast.makeText(this, "Empty input field(s)", Toast.LENGTH_SHORT).show();
-            return true;//should probably implement this somewhere else hmm
+            return true;
         }
     }
 }

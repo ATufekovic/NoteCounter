@@ -49,10 +49,10 @@ public class NameViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         if (v == iv_Cell_delete)
             clickInterface.onDeleteClicked(getAdapterPosition());
         else if (v == iv_Cell_increment) {
-            clickInterface.onIncrementClicked(getAdapterPosition(), unit);
+            clickInterface.onIncrementClicked(getAdapterPosition());
         }
         else if (v == iv_Cell_decrement) {
-            clickInterface.onDecrementClicked(getAdapterPosition(), unit);
+            clickInterface.onDecrementClicked(getAdapterPosition());
         }
     }
 }

@@ -19,34 +19,9 @@
 
         <ImageView
             android:id="@+id/iv_create"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_alignBottom="@id/recyclerView"
             android:src="@drawable/create" />
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/ll_input_color"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/et_item_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-
-            android:hint="@string/et_item_name_hint"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/et_item_count"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/et_item_count_hint"
-            android:inputType="number"/>
-    </LinearLayout>
 </LinearLayout>
