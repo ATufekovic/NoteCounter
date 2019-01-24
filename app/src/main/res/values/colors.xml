@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#A8864E</color>
+    <color name="colorPrimaryDark">#705934</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="tv_cell_name_color">#c6876e</color>
-    <color name="tv_cell_count_color">#c19c68</color>
-    <color name="iv_cell_increment_color">#d6cf77</color>
-    <color name="recyclerView_color">#7da2c4</color>
+    <color name="tv_cell_name_color">#B4B4B4</color>
+    <color name="tv_cell_count_color">#ACACAC</color>
+    <color name="iv_cell_action_color">#8F8F8F</color>
+    <color name="recyclerView_color">#C5C5C5</color>
     <color name="ll_actions_color">#7eb398</color>
     <color name="ll_input_color">#57a368</color>
 </resources>
