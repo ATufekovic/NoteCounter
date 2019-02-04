@@ -24,7 +24,7 @@ public interface EntryDao {
     void delete(Entry entry);
 
     @Update
-        void update(Entry entry);
+    void update(Entry entry);
 
     @Query("UPDATE entry_table SET count=count+1 WHERE name=:entryName" )
     void incrementUpdate(String entryName);

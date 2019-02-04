@@ -69,22 +69,36 @@ public class MainActivity extends AppCompatActivity implements NameClickInterfac
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        boolean count_flag=false;
                         if(!isEmpty(et_input_name))
                         {
                             name = String.valueOf(et_input_name.getText().toString().trim());
                         }
-                        else
+                        else{
+                            Toast.makeText(MainActivity.this, "Empty name field!", Toast.LENGTH_SHORT).show();
                             return;
+                        }
 
                         if(!isEmpty(et_input_count))
                         {
                             count = Integer.parseInt(et_input_count.getText().toString());
                         }
-                        else
-                            return;
+                        else{
+                            count_flag = true;
+                            count = 0;
+                        }
 
                         Entry entry = new Entry(name,count);
-                        mEntryViewModel.insert(entry);
+                        if(!mEntryViewModel.listContainsEntryByName(entry)){
+                            mEntryViewModel.insert(entry);
+                        }
+                        else {
+                            Toast.makeText(MainActivity.this, "Entry already exists!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        if(count_flag)//moved over here in case the "already exists" triggers
+                            Toast.makeText(MainActivity.this, "Empty count field, default to 0", Toast.LENGTH_SHORT).show();
                     }
                 });
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -123,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements NameClickInterfac
             return false;
         else
         {
-            Toast.makeText(this, "Empty input field(s)", Toast.LENGTH_SHORT).show();
             return true;
         }
     }

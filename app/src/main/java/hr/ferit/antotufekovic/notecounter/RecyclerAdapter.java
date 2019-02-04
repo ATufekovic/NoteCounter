@@ -64,34 +64,4 @@ public class RecyclerAdapter extends RecyclerView.Adapter<NameViewHolder> {
     {
         return entryList;
     }
-
-    /*public void insertNewItem(String name,int count, int position) {
-        if (position >= 0 && position <= entryList.size()) {
-            entryList.add(position, new Entry(name,count));
-            notifyItemInserted(position);
-        }
-    }
-    public void insertNewItem(Entry unit, int position)
-    {
-        if (position >= 0 && position <= entryList.size()) {
-            entryList.add(position, unit);
-            notifyItemInserted(position);
-        }
-    }
-    public void changeEntry(Entry entry, int position)
-    {
-        if(entryList.size()<position+1)
-            return;
-        else
-        {
-            entryList.set(position,entry);
-        }
-    }
-
-    public void removeEntry(int position) {
-        if (position >= 0 && position < entryList.size()) {
-            entryList.remove(position);
-            notifyItemRemoved(position);
-        }
-    }*/
 }

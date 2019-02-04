@@ -48,13 +48,7 @@ public abstract class EntryRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            //these lines confused me initially, but i realized they were the reason nothing was saving in my database, don't copy-paste while driving bois
-            //im leaving this all here in case i need to do something in  the future
-            /*mDao.deleteAll();
-            Entry entry = new Entry("Oh yeah",25);
-            mDao.insert(entry);
-            entry=new Entry("Koolaid", 42);
-            mDao.insert(entry);*/
+            //if you need to do something to the data while starting the app, write it here
             return null;
         }
     }
