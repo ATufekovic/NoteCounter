@@ -13,7 +13,7 @@
         android:gravity="center"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:layout_weight="4"/>
+        android:layout_weight="5"/>
 
     <TextView
         android:id="@+id/tv_cell_count"
